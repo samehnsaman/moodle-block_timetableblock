@@ -25,11 +25,10 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'block_timetableblock';
-$plugin->version = 2026042708;
+$plugin->version = 2026042800;
 $plugin->requires = 2022041900;
 $plugin->maturity = MATURITY_ALPHA;
 $plugin->release = '0.1.0';
 $plugin->dependencies = [
     'local_timetable' => 2026042706,
 ];
-

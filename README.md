@@ -17,7 +17,7 @@ The local plugin handles:
 
 The block simply renders that data in a dashboard-friendly format.
 
-## What The Block Is For
+## Purpose
 
 Use this block when you want users to see their timetable directly on the Moodle Dashboard without visiting the full local plugin page first.
 
@@ -33,12 +33,44 @@ It is intended for:
 - Reuses data from `local_timetable`
 - Safe fallback when no timetable data is available
 - Supports Moodle App / mobile integration
-- Supports both timetable layouts returned by the API
+- Supports both timetable layouts returned by the API:
   - standard day-column layout
   - `days_vertical` layout
-- Supports timetable links already resolved by the local plugin
+- Supports timetable links already resolved by the local plugin:
   - meeting links
   - Moodle course links
+
+## Supported Moodle Versions
+
+- Moodle `4.0` and later
+
+## Requirements
+
+- `local_timetable` installed and configured
+
+## Installation
+
+1. Install and configure `local_timetable` first.
+2. Copy this plugin to:
+
+```text
+blocks/timetableblock
+```
+
+3. Run the Moodle upgrade process.
+4. Add the block to the Dashboard.
+
+## Configuration and Usage
+
+This block has no separate API settings of its own.
+
+Configuration is managed through `local_timetable`, including:
+
+- API endpoint and API key
+- cache and refresh behavior
+- timetable matching and filtering logic
+
+After `local_timetable` is configured, add this block to the Moodle Dashboard to show timetable data for the current user.
 
 ## Moodle App Support
 
@@ -55,22 +87,24 @@ Mobile support includes:
 
 PDF / print is intentionally not part of the mobile block experience.
 
-## Requirements
+## Privacy
 
-- Moodle `4.0+`
-- `local_timetable` installed and configured
+This block does not create its own timetable records and does not manage timetable API communication directly.
 
-## Installation
+It depends on `local_timetable` for timetable retrieval, caching, and external-service integration. Privacy details for timetable data handling are therefore primarily documented in the `local_timetable` plugin.
 
-1. Install and configure `local_timetable` first.
-2. Copy this plugin to:
+## Repository
 
-```text
-blocks/timetableblock
-```
+- Repository: [https://github.com/samehnsaman/moodle-block_timetableblock](https://github.com/samehnsaman/moodle-block_timetableblock)
 
-3. Run the Moodle upgrade process.
-4. Add the block to the Dashboard.
+## Issue Tracker
+
+- Issues: [https://github.com/samehnsaman/moodle-block_timetableblock/issues](https://github.com/samehnsaman/moodle-block_timetableblock/issues)
+
+## Support and Maintenance
+
+- Support and maintenance requests should be raised through the GitHub issue tracker.
+- This block is maintained as a companion plugin to `local_timetable` and is intended to be used with the Timetable Digital integration.
 
 ## Notes
 
