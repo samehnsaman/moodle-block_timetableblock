@@ -1,0 +1,12 @@
+.block_timetableblock .cf-panel-card,
+.block_timetableblock .cf-filterbar {
+  width: 100%;
+}
+
+.block_timetableblock .cf-page-title {
+  font-size: 1.1rem;
+}
+
+.block_timetableblock .cf-timetable {
+  min-width: 900px;
+}

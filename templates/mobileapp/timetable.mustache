@@ -1,0 +1,166 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+    @package   block_timetableblock
+    @copyright 2026 Sameh Naim <sameh@timetable.digital>
+    @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+}}
+{{=<% %>=}}
+<div class="ttd-mobile-page">
+  <div class="ttd-mobile-header">
+    <div class="ttd-mobile-title"><% mobile_title %></div>
+    <%#school_name %>
+    <div class="ttd-mobile-school"><% school_name %></div>
+    <%/school_name %>
+  </div>
+
+  <%#notice %>
+  <div class="ttd-mobile-notice"><% notice %></div>
+  <%/notice %>
+
+  <form id="ttd-mobile-filters" class="ttd-mobile-filters">
+    <%#is_admin %>
+    <label class="ttd-mobile-filter">
+      <span><% teacher_filter_label %></span>
+      <select name="teacher">
+        <%#teacher_options %>
+        <option value="<% value %>" <%#selected %>selected<%/selected %>><% label %></option>
+        <%/teacher_options %>
+      </select>
+    </label>
+    <label class="ttd-mobile-filter">
+      <span><% class_filter_label %></span>
+      <select name="class">
+        <%#class_options %>
+        <option value="<% value %>" <%#selected %>selected<%/selected %>><% label %></option>
+        <%/class_options %>
+      </select>
+    </label>
+    <%/is_admin %>
+    <label class="ttd-mobile-filter">
+      <span><% day_filter_label %></span>
+      <select name="day">
+        <%#day_options %>
+        <option value="<% value %>" <%#selected %>selected<%/selected %>><% label %></option>
+        <%/day_options %>
+      </select>
+    </label>
+    <div class="ttd-mobile-filter-actions">
+      <ion-button core-site-plugins-new-content component="block_timetableblock" method="view_timetable" samePage="true" form="ttd-mobile-filters" size="small">
+        <% mobile_apply_label %>
+      </ion-button>
+      <ion-button core-site-plugins-new-content component="block_timetableblock" method="view_timetable" samePage="true" size="small" fill="outline">
+        <% mobile_clear_label %>
+      </ion-button>
+    </div>
+  </form>
+
+  <%#timetables %>
+  <section class="ttd-mobile-table">
+    <div class="ttd-mobile-table-head">
+      <div class="ttd-mobile-table-title"><% name %></div>
+      <%#term_name %>
+      <div class="ttd-mobile-table-meta"><% term_label %>: <% term_name %></div>
+      <%/term_name %>
+    </div>
+
+    <%^layout_days_vertical %>
+    <%#rows %>
+    <div class="ttd-mobile-day-card <%#is_today %>ttd-mobile-is-today<%/is_today %>">
+      <div class="ttd-mobile-day-title"><% label %></div>
+      <%#periods %>
+      <div class="ttd-mobile-period-row <%#is_current_period %>ttd-mobile-is-current<%/is_current_period %> <%#is_break %>ttd-mobile-break<%/is_break %>">
+        <div class="ttd-mobile-period-name">
+          <%#is_break %><% break_label %><%/is_break %>
+          <%^is_break %>
+          <% period_number %>
+          <%/is_break %>
+        </div>
+        <div class="ttd-mobile-period-content">
+          <%#is_break %>
+          <div class="ttd-mobile-break-label"><% break_label %></div>
+          <%/is_break %>
+          <%^is_break %>
+          <%#entries %>
+          <div class="ttd-mobile-entry" style="border-left-color: <% color %>;">
+            <div class="ttd-mobile-entry-subject"><% subject_name %></div>
+            <%#teacher_name %><div class="ttd-mobile-entry-meta"><% teacher_name %></div><%/teacher_name %>
+            <%#class_name %><div class="ttd-mobile-entry-meta"><% class_name %></div><%/class_name %>
+            <%#classroom_name %><div class="ttd-mobile-entry-meta"><% classroom_name %></div><%/classroom_name %>
+            <%#has_meeting_link %><div class="ttd-mobile-entry-link"><a href="<% meeting_link %>"><% meeting_label %></a></div><%/has_meeting_link %>
+            <%#has_course_link %><div class="ttd-mobile-entry-link"><a href="<% course_url %>"><% course_label %></a></div><%/has_course_link %>
+          </div>
+          <%/entries %>
+          <%^entries %><div class="ttd-mobile-empty"><% mobile_noentries %></div><%/entries %>
+          <%/is_break %>
+        </div>
+      </div>
+      <%/periods %>
+    </div>
+    <%/rows %>
+    <%^rows %><div class="ttd-mobile-empty"><% empty_message %></div><%/rows %>
+    <%/layout_days_vertical %>
+
+    <%#layout_days_vertical %>
+    <div class="ttd-mobile-scroll">
+      <table class="ttd-mobile-grid ttd-mobile-grid-vertical">
+        <thead>
+          <tr>
+            <th class="ttd-mobile-corner"><% day_filter_label %></th>
+            <%#period_schedules %>
+            <th class="<%#is_current_period %>ttd-mobile-is-current<%/is_current_period %>"><% name %></th>
+            <%/period_schedules %>
+          </tr>
+        </thead>
+        <tbody>
+          <%#rows %>
+          <tr>
+            <td class="ttd-mobile-gutter <%#is_today %>ttd-mobile-is-today<%/is_today %>">
+              <div class="ttd-mobile-gutter-name"><% label %></div>
+            </td>
+            <%#periods %>
+            <td class="ttd-mobile-cell <%#is_current_period %>ttd-mobile-is-current<%/is_current_period %> <%#is_break %>ttd-mobile-break<%/is_break %>">
+              <%#is_break %>
+              <div class="ttd-mobile-break-label"><% break_label %></div>
+              <%/is_break %>
+              <%^is_break %>
+              <%#entries %>
+              <div class="ttd-mobile-entry" style="border-left-color: <% color %>;">
+                <div class="ttd-mobile-entry-subject"><% subject_name %></div>
+                <%#teacher_name %><div class="ttd-mobile-entry-meta"><% teacher_name %></div><%/teacher_name %>
+                <%#class_name %><div class="ttd-mobile-entry-meta"><% class_name %></div><%/class_name %>
+                <%#classroom_name %><div class="ttd-mobile-entry-meta"><% classroom_name %></div><%/classroom_name %>
+                <%#has_meeting_link %><div class="ttd-mobile-entry-link"><a href="<% meeting_link %>"><% meeting_label %></a></div><%/has_meeting_link %>
+                <%#has_course_link %><div class="ttd-mobile-entry-link"><a href="<% course_url %>"><% course_label %></a></div><%/has_course_link %>
+              </div>
+              <%/entries %>
+              <%^entries %><div class="ttd-mobile-empty"><% mobile_noentries %></div><%/entries %>
+              <%/is_break %>
+            </td>
+            <%/periods %>
+          </tr>
+          <%/rows %>
+        </tbody>
+      </table>
+    </div>
+    <%/layout_days_vertical %>
+  </section>
+  <%/timetables %>
+
+  <%^timetables %>
+  <div class="ttd-mobile-empty"><% empty_message %></div>
+  <%/timetables %>
+</div>
