@@ -2,6 +2,8 @@
 
 `block_timetableblock` is a Moodle dashboard block that displays timetable data provided by the **Timetable Digital** local plugin.
 
+Timetable Digital is available at [https://timetable.digital/](https://timetable.digital/).
+
 This block does **not** connect to the timetable API by itself and does **not** store timetable data. It depends on the local plugin:
 
 - `local_timetable`
